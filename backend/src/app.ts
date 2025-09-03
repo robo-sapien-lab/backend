@@ -80,7 +80,10 @@ app.get('/api', (_req, res) => {
   });
 });
 
-// API routes
+// API routes (JWT-protected)
+import { authenticateJWT } from './middleware/auth';
+
+app.use('/api', authenticateJWT); // protect all /api/* endpoints
 app.use('/api/ask', askRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/progress', progressRoutes);
