@@ -34,7 +34,9 @@ export const authenticateJWT = async (
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.SUPABASE_JWT_SECRET) as SupabaseJWTPayload;
+      const decoded = jwt.verify(token, process.env.SUPABASE_JWT_SECRET, {
+        algorithms: ['ES256']
+      }) as SupabaseJWTPayload;
       
       // Validate token expiration
       if (decoded.exp < Date.now() / 1000) {
